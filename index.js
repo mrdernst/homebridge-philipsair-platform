@@ -1,8 +1,8 @@
 /**
  * v1
  *
- * @url https://github.com/SeydX/homebridge-philipsair-platform
- * @author SeydX <seydx@outlook.de>
+ * @url https://github.com/mrdernst/homebridge-philipsair-platform
+ * @author mrdernst <dominik@de-applications.de>
  *
  **/
 

@@ -3,7 +3,7 @@
   "pluginType": "platform",
   "singular": true,
   "headerDisplay": "Homebridge Plugin for Philips Air Purifiers / Humidifiers.",
-  "footerDisplay": "For documentation please see [GitHub repository](https://github.com/SeydX/homebridge-philipsair-platform)",
+  "footerDisplay": "For documentation please see [GitHub repository](https://github.com/mrdernst/homebridge-philipsair-platform)",
   "schema": {
     "type": "object",
     "properties": {
