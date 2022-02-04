@@ -390,10 +390,12 @@ class Handler {
           this.obj.om === 't'
             ? 100
             : this.obj.om === 's'
-            ? this.accessory.context.config.sleepSpeed
-              ? 20
-              : 25
-            : parseInt(this.obj.om) * (this.accessory.context.config.sleepSpeed ? 20 : 25)
+            ? 25
+            : this.obj.om === 'a' && this.obj.mode === 'A'
+            ? 50
+            : this.obj.om === '2' && this.obj.mode === 'M'
+            ? 75
+            : 0
         );
 
       if (this.airQualityService) {
