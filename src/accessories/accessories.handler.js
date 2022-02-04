@@ -154,8 +154,9 @@ class Handler {
       this.purifierService.updateCharacteristic(this.api.hap.Characteristic.TargetAirPurifierState, 0);
 
       const args = [...this.args];
-      if (values.mode) args.push('set', `mode=${values.mode}`);
-      if (values.om) args.push('set', `om=${values.om}`);
+      args.push('set');
+      if (values.mode) args.push(`mode=${values.mode}`);
+      if (values.om) args.push(`om=${values.om}`);
 
       logger.info(`Purifier Rotation Speed: ${value}`, this.accessory.displayName);
 
