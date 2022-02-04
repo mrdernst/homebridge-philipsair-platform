@@ -102,39 +102,65 @@ class Handler {
 
   async setPurifierRotationSpeed(value) {
     try {
-      let divisor = 25;
-      let offset = 0;
+      // let divisor = 25;
+      // let offset = 0;
 
-      if (this.accessory.context.config.sleepSpeed) {
-        divisor = 20;
-        offset = 1;
-      }
+      // if (this.accessory.context.config.sleepSpeed) {
+      //   divisor = 20;
+      //   offset = 1;
+      // }
 
-      const speed = Math.ceil(value / divisor);
+      // const speed = Math.ceil(value / divisor);
 
-      if (speed > 0) {
-        const values = {
-          mode: 'M',
-          om: '',
-        };
+      // if (speed > 0) {
+      //   const values = {
+      //     mode: 'M',
+      //     om: '',
+      //   };
 
-        if (offset == 1 && speed == 1) {
+      //   if (offset == 1 && speed == 1) {
+      //     values.om = 's';
+      //   } else if (speed < 4 + offset) {
+      //     values.om = (speed - offset).toString();
+      //   } else {
+      //     values.om = 't';
+      //   }
+
+      const values = {
+        mode: '',
+        om: '',
+      };
+
+      switch (value) {
+        case 25:
           values.om = 's';
-        } else if (speed < 4 + offset) {
-          values.om = (speed - offset).toString();
-        } else {
+          break;
+
+        case 50:
+          values.om = 'a';
+          values.mode = 'A';
+          break;
+
+        case 75:
+          values.om = 2;
+          values.mode = 'M';
+          break;
+
+        case 100:
           values.om = 't';
-        }
-
-        this.purifierService.updateCharacteristic(this.api.hap.Characteristic.TargetAirPurifierState, 0);
-
-        const args = [...this.args];
-        args.push('set', `mode=${values.mode} om=${values.om}`);
-
-        logger.info(`Purifier Rotation Speed: ${value}`, this.accessory.displayName);
-
-        await this.sendCMD(args);
+          break;
       }
+
+      this.purifierService.updateCharacteristic(this.api.hap.Characteristic.TargetAirPurifierState, 0);
+
+      const args = [...this.args];
+      if (values.mode) args.push('set', `mode=${values.mode}`);
+      if (values.om) args.push('set', `om=${values.om}`);
+
+      logger.info(`Purifier Rotation Speed: ${value}`, this.accessory.displayName);
+
+      await this.sendCMD(args);
+      // }
     } catch (err) {
       logger.warn('An error occured during changing purifier rotation speed!', this.accessory.displayName);
       logger.error(err, this.accessory.displayName);
